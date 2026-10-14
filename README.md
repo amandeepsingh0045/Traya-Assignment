@@ -14,11 +14,47 @@ UI automation for **SauceDemo** (https://www.saucedemo.com) and API automation f
 ---
 
 ## 1. Prerequisites
-- **JDK 17** (Gradle toolchain; auto-downloaded via foojay if missing)
-- **Chrome** (or Firefox / Edge / Safari) – drivers are resolved automatically by Selenium Manager
-- **IDE:** Lombok plugin + *Enable annotation processing*, otherwise the IDE shows false compile errors
-- `gradle.properties` pins the Gradle JVM to a local JDK 17 path (`org.gradle.java.home`).
-  **Remove or adjust that line on another machine** – or simply export `JAVA_HOME` to any JDK 17–21.
+## 1. Prerequisites
+
+- **JDK 17:** Required for compiling and running the test automation framework.
+- **Git:** Required to clone the repository.
+- **Browser:** Chrome is the default. Firefox and Edge are also supported where configured. Safari is available on macOS only.
+- **IDE (optional):** IntelliJ IDEA or another Java IDE. Install the Lombok plugin and enable annotation processing for IDE support.
+
+### Java configuration
+
+Verify that Java 17 is installed:
+
+```bash
+java -version
+javac -version
+```
+
+Configure `JAVA_HOME` to point to your local JDK installation if it is not already configured.
+
+**Windows (PowerShell):**
+
+```powershell
+$env:JAVA_HOME = "C:\path\to\your\jdk-17"
+$env:Path = "$env:JAVA_HOME\bin;$env:Path"
+```
+
+**macOS / Linux:**
+
+```bash
+export JAVA_HOME="/path/to/your/jdk-17"
+export PATH="$JAVA_HOME/bin:$PATH"
+```
+
+Replace the example path with the actual JDK installation directory on your machine.
+
+The project uses the Gradle Wrapper and a Java 17 toolchain. No separate Gradle installation is required.
+
+The repository does not require a machine-specific `org.gradle.java.home` setting. Do not add local Java installation paths to committed project configuration.
+
+### Browser drivers
+
+Selenium Manager resolves compatible browser drivers automatically for supported browsers. Ensure the selected browser is installed and available on your machine.
 
 ## 2. How to run
 ```bash
