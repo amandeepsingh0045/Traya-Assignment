@@ -1,0 +1,30 @@
+{
+  "validPets": [
+    { "name": "Rex",     "category": "Dogs",  "status": "available", "tags": ["friendly"] },
+    { "name": "Tom",     "category": "Cats",  "status": "pending",   "tags": ["indoor", "lazy"] },
+    { "name": "Nemo",    "category": "Fish",  "status": "sold",      "tags": [] },
+    { "name": "Ünïcødé 宠物 🐶", "category": "Exotic", "status": "available", "tags": ["unicode"] },
+    { "name": "A",       "category": "Birds", "status": "available", "tags": ["min-length-name"] }
+  ],
+
+  "rejectedPetPayloads": [
+    { "name": "malformed JSON is rejected",
+      "payload": "{\"id\": 123, \"name\": ",
+      "expectedStatus": 400, "expectedMessage": "bad input" },
+    { "name": "string value for numeric id is rejected",
+      "payload": { "id": "not-a-number", "name": "x", "photoUrls": [] },
+      "expectedStatus": 500, "expectedMessage": "something bad happened" }
+  ],
+
+  "specViolations": [
+    { "name": "missing mandatory 'name'",
+      "payload": { "photoUrls": ["https://example.com/a.png"], "status": "available" },
+      "expectedStatus": 405 },
+    { "name": "missing mandatory 'photoUrls'",
+      "payload": { "name": "no-photos", "status": "available" },
+      "expectedStatus": 405 },
+    { "name": "status outside enum [available, pending, sold]",
+      "payload": { "name": "x", "photoUrls": [], "status": "flying" },
+      "expectedStatus": 405 }
+  ]
+}

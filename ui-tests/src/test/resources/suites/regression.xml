@@ -1,0 +1,7 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd"><!--  Parallelism is owned by TestNG (not by code):    parallel="methods"  -> each @Test method on its own thread, each thread gets its own browser via ThreadLocal    thread-count        -> max concurrent browsers    data-provider-thread-count -> parallel rows for @DataProvider(parallel = true)--><suite name="UI Regression Suite" parallel="methods" thread-count="4" data-provider-thread-count="3">    <listeners>        <listener class-name="com.assignment.common.listeners.TestListener"/>        <listener class-name="com.assignment.common.listeners.RetryTransformer"/>    </listeners>    <test name="SauceDemo - Regression">        <classes>
+            <class name="com.assignment.ui.tests.LoginTests"/>
+            <class name="com.assignment.ui.tests.CartTests"/>
+            <class name="com.assignment.ui.tests.CheckoutTests"/>
+        </classes>
+    </test>
+</suite>

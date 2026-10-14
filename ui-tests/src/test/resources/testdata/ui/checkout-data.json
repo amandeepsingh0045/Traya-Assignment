@@ -1,0 +1,11 @@
+{
+  "product": "Sauce Labs Backpack",
+  "customer": { "firstName": "John", "lastName": "Doe", "postalCode": "560001" },
+  "expectedConfirmationHeader": "Thank you for your order!",
+  "expectedConfirmationText": "Your order has been dispatched, and will arrive just as fast as the pony can get there!",
+  "invalidCustomerDetails": [
+    { "scenario": "First name missing",  "customer": { "firstName": "",     "lastName": "Doe", "postalCode": "560001" }, "expectedError": "Error: First Name is required" },
+    { "scenario": "Last name missing",   "customer": { "firstName": "John", "lastName": "",    "postalCode": "560001" }, "expectedError": "Error: Last Name is required" },
+    { "scenario": "Postal code missing", "customer": { "firstName": "John", "lastName": "Doe", "postalCode": "" },       "expectedError": "Error: Postal Code is required" }
+  ]
+}

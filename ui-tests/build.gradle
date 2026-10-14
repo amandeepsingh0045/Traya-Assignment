@@ -1,0 +1,10 @@
+ext.lombokVersion = '1.18.38'
+
+dependencies {
+    implementation "org.seleniumhq.selenium:selenium-java:${seleniumVersion}"
+
+    compileOnly             "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor     "org.projectlombok:lombok:${lombokVersion}"
+    testCompileOnly         "org.projectlombok:lombok:${lombokVersion}"
+    testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+}

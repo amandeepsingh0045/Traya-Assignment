@@ -1,0 +1,8 @@
+plugins {
+    // Auto-downloads JDK 17 if the toolchain isn't installed locally
+    id 'org.gradle.toolchains.foojay-resolver-convention' version '1.0.0'
+}
+
+rootProject.name = 'TakeHomeAutomationAssignment'
+
+include 'common', 'ui-tests', 'api-tests'

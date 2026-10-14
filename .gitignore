@@ -1,0 +1,13 @@
+.gradle/
+build/
+**/build/
+out/
+.idea/
+*.iml
+.vscode/
+.env
+.env.*
+!.env.example
+*.log
+allure-results/
+allure-report/

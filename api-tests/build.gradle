@@ -1,0 +1,12 @@
+ext.lombokVersion = '1.18.38'
+
+dependencies {
+    implementation "io.rest-assured:rest-assured:${restAssuredVersion}"
+    implementation "io.rest-assured:json-schema-validator:${restAssuredVersion}"
+
+    // Lombok: compile-time only (generates getters/setters/builders), not shipped at runtime
+    compileOnly             "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor     "org.projectlombok:lombok:${lombokVersion}"
+    testCompileOnly         "org.projectlombok:lombok:${lombokVersion}"
+    testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+}

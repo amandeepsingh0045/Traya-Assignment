@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="API Smoke Suite">
+    <listeners>
+        <listener class-name="com.assignment.common.listeners.TestListener"/>
+        <listener class-name="com.assignment.common.listeners.RetryTransformer"/>
+    </listeners>
+    <test name="Petstore API Smoke">
+        <groups><run><include name="smoke"/></run></groups>
+        <packages><package name="com.assignment.api.tests"/></packages>
+    </test>
+</suite>

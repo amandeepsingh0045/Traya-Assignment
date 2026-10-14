@@ -1,0 +1,57 @@
+ext {
+    seleniumVersion    = '4.25.0'
+    testngVersion      = '7.10.2'
+    restAssuredVersion = '5.5.0'
+    extentVersion      = '5.1.2'
+    log4jVersion       = '2.24.1'
+    jacksonVersion     = '2.18.0'
+}
+
+subprojects {
+    apply plugin: 'java'
+
+    group = 'com.assignment'
+    version = '1.0.0'
+
+    java {
+        toolchain { languageVersion = JavaLanguageVersion.of(17) }
+    }
+
+    repositories { mavenCentral() }
+
+    dependencies {
+        implementation "org.testng:testng:${testngVersion}"
+        implementation "com.aventstack:extentreports:${extentVersion}"
+        implementation "org.apache.logging.log4j:log4j-api:${log4jVersion}"
+        implementation "org.apache.logging.log4j:log4j-core:${log4jVersion}"
+        implementation "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
+    }
+
+    tasks.withType(JavaCompile).configureEach { options.encoding = 'UTF-8' }
+}
+
+// Shared TestNG configuration for test modules
+configure(subprojects.findAll { it.name.endsWith('-tests') }) {
+    dependencies {
+        implementation project(':common')
+    }
+
+    test {
+        // -Psuite=smoke  -> src/test/resources/suites/smoke.xml
+        def suite = project.findProperty('suite') ?: 'regression'
+        useTestNG {
+            suites "src/test/resources/suites/${suite}.xml"
+            if (project.hasProperty('groups')) includeGroups project.property('groups').split(',')
+        }
+        // Forward -Dkey=value system props (env, browser, headless, ...) to the test JVM
+        systemProperties System.getProperties().findAll { k, v ->
+            ['env', 'browser', 'headless', 'explicit.wait', 'retry.count'].contains(k) ||
+                    k.toString().startsWith('ui.') || k.toString().startsWith('api.')
+        }
+        testLogging {
+            events 'passed', 'skipped', 'failed'
+            exceptionFormat = 'full'
+        }
+        outputs.upToDateWhen { false }
+    }
+}
